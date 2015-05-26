@@ -33,10 +33,10 @@
 				</div>
 			</div>
 			<div class="col-xs-4 text-right">
-				<button class="btn btn-default">
+				<a class="btn btn-default" href='<?php echo $base_url.'messages/add'; ?>'>
 					<i class="fa fa-plus-square"></i>
 					&nbsp;New Message
-				</button>
+				</a>
 			</div>
 		</div>
 		<!-- /. -->

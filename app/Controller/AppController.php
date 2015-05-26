@@ -44,6 +44,7 @@ class AppController extends Controller {
 									'bower_components/momentjs/moment.js',
 									'bower_components/datetimepicker/build/js/bootstrap-datetimepicker.min.js',
 									'bower_components/bootstrapvalidator/dist/js/bootstrapValidator.js',
+									'bower_components/select2/dist/js/select2.full.js'
 								);
 
 		$this->data['styles']         = array(
@@ -53,6 +54,7 @@ class AppController extends Controller {
 									'bower_components/jasny-bootstrap/css/jasny-bootstrap.css',
 									'bower_components/datetimepicker/build/css/bootstrap-datetimepicker.css',
 									'bower_components/bootstrapvalidator/dist/css/bootstrapValidator.css',
+									'bower_components/select2/dist/css/select2.min.css'
 								);
 		
 		$this->data['base_url']     = "http://fdc.dev/";

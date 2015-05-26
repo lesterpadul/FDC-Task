@@ -2,11 +2,19 @@
 class UsersController extends AppController{
 	public $helpers = array('Html','Form');
 
+	/**
+	 * [initialize description]
+	 * @return [type] [description]
+	 */
 	public function initialize(){
 		parent::initialize();
 	}
 		
 
+	/**
+	 * [login description]
+	 * @return [type] [description]
+	 */
 	public function login(){
 		$data = $this->request->data['User'];
 		
@@ -23,12 +31,11 @@ class UsersController extends AppController{
 			$this->Session->write('profile',$user['User']);
 			$this->User->id = $user['User']['id'];
 			$this->User->save(array('User'=>array('last_login_time'=>date('Y-m-d H:i:s'))));
-
 			die(json_encode(array('error'=>false,'content'=>'success')));
 		else:	
-
 			die(json_encode(array('error'=>true,'content'=>'fail')));
 		endif;
+
 		return false;
 	}
 	
@@ -57,7 +64,7 @@ class UsersController extends AppController{
      * @return [type]          [description]
      */
     public function view($userId){
-    	$this->initialize();
+    	UsersController::initialize();
     	$user = $this->User->findById($userId);
     	$this->data['styles'][] = 'css/main.css';
     	$this->set($this->data);
@@ -129,6 +136,10 @@ class UsersController extends AppController{
 		
     }
     
+    /**
+     * [register description]
+     * @return [type] [description]
+     */
    	public function register(){
 
    		if($this->request->is(array('post','put'))):
