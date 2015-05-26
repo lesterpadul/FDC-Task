@@ -3,12 +3,14 @@ $(document).ready(function(){
 
 	if($('#user_birthday').length!==0)
 	{
+		
 		$('#user_birthday').datetimepicker();
 		var time_now = moment();
 		$('#user_birthday').data("DateTimePicker").maxDate(time_now);
 		$("#user_birthday").on("dp.change",function (e) {
         	$("#UpdateUserForm").bootstrapValidator('revalidateField','birthday');
         });
+
 	}
 
 	//validate the addition of payments

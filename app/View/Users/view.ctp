@@ -29,10 +29,19 @@
   					<?php echo $user['User']['name']; ?>
   				</h1>
   				<div>
-  					Gender : <?php echo $user['User']['gender']; ?>
+  					Gender :
+  					<?php
+  						if($user['User']['gender']=='1'):
+  							echo "Male";
+  						elseif($user['User']['gender']=='2'):
+  							echo "Female";
+  						else:
+  							echo "Other";
+  						endif;
+  					?>
   				</div>
   				<div>
-  					Birthdate : <?php echo $user['User']['birthday']; ?>
+  					Birthdate : <?php echo date("F j, Y",strtotime($user['User']['birthday'])); ?>
   				</div>
   				<div>
   					Joined : <?php echo $user['User']['created']; ?>

@@ -82,7 +82,7 @@ class UsersController extends AppController{
 				if(!in_array($ext, $allowed_types)):
 					$error[] = 'invalid_type';
 				endif;
-
+				
 				/*if(move_uploaded_file($_FILES['image']['tmp_name'],)):
 				endif;*/
 			endif;
@@ -109,9 +109,11 @@ class UsersController extends AppController{
     	$user = $this->User->findById($user_id);
 		$this->set($this->data);
 		$this->request->data = $user;
+		
     }
 
    	public function register(){
+
    		if($this->request->is(array('post','put'))):
    			$this->User->create();
    			$user = array(
@@ -124,11 +126,11 @@ class UsersController extends AppController{
    						)
    					);
    			$this->User->save($user);
-   			
+
    			$user = $this->User->findById($this->User->id);
-   			
+
    			$this->Session->write('profile',$user['User']);
-   			
+
    			$this->User->id = $user['User']['id'];
 			$this->User->save(array('User'=>array('last_login_time'=>date('Y-m-d H:i:s'))));
 			die(json_encode(array('error'=>false,'content'=>'success')));
@@ -136,5 +138,5 @@ class UsersController extends AppController{
 
    		$this->autoRender =false;
    	}
-   		
+   	
 }
