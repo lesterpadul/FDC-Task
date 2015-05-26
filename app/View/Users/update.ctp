@@ -14,9 +14,10 @@
 					if(is_null($this->request->data['User']['image']) || empty($this->request->data['User']['image'])):
 						$img_src .= 'public/images/users/default.jpg';
 					else:
-						$img_src .= $this->request->data['User']['image'];
+						$img_src .= 'public/images/users/'.$this->request->data['User']['image'];
 					endif;
 				?>
+
 				<div class="col-xs-4">
 					<div class="fileinput fileinput-new" data-provides="fileinput">
 					  <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
@@ -43,9 +44,10 @@
 					</div>	
 					
 					<div class="form-group">
+						
 						<div class="col-xs-6" style='padding-left:0px;'>
 							<label>Birthday*</label>
-							<div class="input-group"  id='user_birthday' data-date-format="YYYY-MM-DD">
+							<div class="input-group"  id='userBirthday' data-date-format="YYYY-MM-DD">
 								<input type="text" name='birthday' value="<?php echo $this->request->data['User']['birthday']; ?>" class="form-control" data-date-format="YYYY-MM-DD">
 								<div class="input-group-btn">
 									<button class="btn btn-default" type='button'>
@@ -54,6 +56,7 @@
 								</div>
 							</div>
 						</div>
+
 						<div class="col-xs-6" style='padding-right:0px;'>
 							<label>Gender*</label>
 							<select name="gender" id="" class="form-control">

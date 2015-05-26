@@ -19,7 +19,7 @@
 					if(is_null($user['User']['image']) || empty($user['User']['image'])):
 						$img_src .= 'public/images/users/default.jpg';
 					else:
-						$img_src .= $this->request->data['User']['image'];
+						$img_src .= 'public/images/users/'.$user['User']['image'];
 					endif;
 				?>
   				<img src="<?php echo $img_src; ?>" alt="" class="img-responsive">
@@ -41,13 +41,22 @@
   					?>
   				</div>
   				<div>
-  					Birthdate : <?php echo date("F j, Y",strtotime($user['User']['birthday'])); ?>
+  					Birthdate : 
+  					<?php 
+  						echo date("F j, Y",strtotime($user['User']['birthday'])); 
+  					?>
   				</div>
   				<div>
-  					Joined : <?php echo $user['User']['created']; ?>
+  					Joined : 
+  					<?php 
+  						echo date("F j, Y",strtotime($user['User']['created'])); 
+  					?>
   				</div>
   				<div>
-  					Last Login : <?php echo $user['User']['last_login_time']; ?>
+  					Last Login : 
+  					<?php 
+  						echo date("F j, Y", strtotime($user['User']['last_login_time'])); 
+  					?>
   				</div>
   			</div>
   		</div>
@@ -64,6 +73,6 @@
   			</div>
   		</div>
 		<!-- /. -->
-
+		
   	</div>
 </div>

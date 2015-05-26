@@ -1,18 +1,16 @@
 'use strict'
 $(document).ready(function(){
 
-	if($('#user_birthday').length!==0)
-	{
-		
-		$('#user_birthday').datetimepicker();
-		var time_now = moment();
-		$('#user_birthday').data("DateTimePicker").maxDate(time_now);
-		$("#user_birthday").on("dp.change",function (e) {
+	//check if the birthday field exists
+	if($('#userBirthday').length!==0) {
+		$('#userBirthday').datetimepicker(); //declare datetimepicker
+		var time_now = moment(); //get date now
+		$('#userBirthday').data("DateTimePicker").maxDate(time_now);
+		$("#userBirthday").on("dp.change",function (e) {
         	$("#UpdateUserForm").bootstrapValidator('revalidateField','birthday');
         });
-
 	}
-
+	
 	//validate the addition of payments
 	$("#UpdateUserForm").bootstrapValidator({
 		excluded: [':disabled', ':hidden', ':not(:visible)'],
@@ -50,9 +48,6 @@ $(document).ready(function(){
           	},
           	'password':{
           		validators: {
-          	  		notEmpty: {
-          	  			message : "Password is required and cannot be empty"
-          	  		},
           	  		identical: {
           	  			field: 'cpassword',
           	  			message: 'Passwords must match!'
@@ -61,9 +56,6 @@ $(document).ready(function(){
           	},
           	'cpassword':{
           		validators: {
-          	  		notEmpty: {
-          	  			message : "Password is required and cannot be empty"
-          	  		},
           	  		identical: {
           	  			field: 'password',
           	  			message: 'Passwords must match!'
@@ -73,6 +65,7 @@ $(document).ready(function(){
       	}
   	})
 	.on("success.form.bv",function(e){
+		//submit the form by default
 		$(e.target).data('bootstrapValidator').defaultSubmit();
 	});
 
