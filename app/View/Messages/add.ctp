@@ -16,7 +16,7 @@
 						</label>
 
 						<!-- select -->
-						<select name="to" id="" class="form-control">
+						<select name="to_id" id="" class="form-control">
 							<?php 
 								if(count($recipients)!==0) {
 									foreach($recipients as $recipient) {
