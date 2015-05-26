@@ -45,7 +45,7 @@
 	<hr>
 
 
-	<div class='threadMain' >
+	<div class='threadMain' ng-show='!loading'>
 		<div class="threadContainer clearfix" ng-repeat='thread in threads track by $index' ng-click='navigateToConversation(thread.User.userId);'>
 			<div class="col-xs-2 avatar" style='background:url({{getThreadAvatar(thread.User);}}) center; background-size:cover; background-color: #ccc; '></div>
 
@@ -59,6 +59,12 @@
 				</div>
 			</div>
 		</div>
+	</div>
+
+	<div class='text-center' ng-show="loading">
+		<h1>
+			<i class="fa fa-spinner fa-spin"></i>
+		</h1>
 	</div>
 	
 	<footer class='threadFooter text-center'>

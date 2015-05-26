@@ -16,5 +16,5 @@
 			Show More
 		</button>
 	</footer>
-
+	
 </div>

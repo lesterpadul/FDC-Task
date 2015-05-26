@@ -63,7 +63,8 @@ class MessagesController extends AppController{
 															'Message.to_id'=>$profile['id'],
 															'Message.from_id'=>$profile['id']
 														),
-												)
+												),
+												'limit'=>1
 											)
 										);
 
