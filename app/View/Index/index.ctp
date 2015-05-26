@@ -19,37 +19,37 @@
         <!-- signup -->
         <div id="signup" style='display:none;'>   
           
-          <form action="/" method="post">
+          <form action="<?php echo $base_url.'users/register'; ?>" method="post" id='RegisterUserForm'>
             
-            <div class="field-wrap">
+            <div class="field-wrap form-group">
               <label>
                 Name<span class="req">*</span>
               </label>
-              <input type="text" required autocomplete="off" />
+              <input type="text" required autocomplete="off" name='name_user'/>
             </div>
             
-            <div class="field-wrap">
+            <div class="field-wrap form-group">
               <label>
                 Email Address<span class="req">*</span>
               </label>
-              <input type="email"required autocomplete="off"/>
+              <input type="email"required autocomplete="off" name='email'/>
             </div>
             
-            <div class="field-wrap">
+            <div class="field-wrap form-group">
               <label>
                 Set A Password<span class="req">*</span>
               </label>
-              <input type="password"required autocomplete="off"/>
+              <input type="password"required autocomplete="off" name='password'/>
             </div>
 
-            <div class="field-wrap">
+            <div class="field-wrap form-group">
               <label>
                 Re-type Password<span class="req">*</span>
               </label>
-              <input type="password"required autocomplete="off"/>
+              <input type="password"required autocomplete="off" name='cpassword'/>
             </div>
             
-            <button type="submit" class="button button-block"/>Get Started</button>
+            <button type="submit" class="button button-block" id='register_user_btn' >Get Started</button>
             
           </form>
         </div>

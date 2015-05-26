@@ -46,6 +46,58 @@ $(document).ready(function(){
 	  $(target).fadeIn(600);
 	  
 	});
+
+
+	//validate the addition of payments
+	$("#RegisterUserForm").bootstrapValidator({
+		excluded: [':disabled', ':hidden', ':not(:visible)'],
+      	fields: {
+          	'name_user': {
+              	validators: {
+                  	notEmpty: {
+                      	message: 'Name is required and cannot be empty'
+                  	}
+              	}
+          	},
+          	'email':{
+          		validators: {
+          	  		notEmpty: {
+          	  			message : "Email is required and cannot be empty"
+          	  		},
+          	  		emailAddress: {
+          	  			message : "This must be a valid email address!"
+          	  		}	
+          		}
+          	},
+          	'password':{
+          		validators: {
+          	  		notEmpty: {
+          	  			message : "Password is required and cannot be empty"
+          	  		},
+          	  		identical: {
+          	  			field: 'cpassword',
+          	  			message: 'Passwords must match!'
+          	  		}
+          		}
+          	},
+          	'cpassword':{
+          		validators: {
+          	  		notEmpty: {
+          	  			message : "Password is required and cannot be empty"
+          	  		},
+          	  		identical: {
+          	  			field: 'password',
+          	  			message: 'Passwords must match!'
+          	  		}
+          		}
+          	}
+      	}
+  	})
+	.on("success.form.bv",function(e){
+		REGISTER_USER($('#register_user_btn'));
+		return false;
+	});
+
 });
 
 
@@ -90,4 +142,26 @@ function SET_LABEL($content,$type,$hide){
 		.addClass($type)
 		.show();
 	}
+}
+
+function REGISTER_USER(obj){
+	var ser    = $('#RegisterUserForm').serialize();
+	var action = $('#RegisterUserForm').attr('action');
+
+	$(obj).attr('disabled','disabled');
+
+	//validate the field here	
+	$.post(action,ser,function(data){
+		console.log(data);
+		if(!data.error){
+			window.location.href=base_url+'home/index';
+		}else{
+			SET_LABEL('Incorrect Details','alert-danger');
+		}
+		$(obj).removeAttr('disabled');
+	},'json').fail(function(x){
+		$(obj).removeAttr('disabled');
+		console.log(x.responseText);
+	});
+
 }
