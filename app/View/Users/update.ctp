@@ -44,10 +44,9 @@
 					
 					<div class="form-group">
 						<div class="col-xs-6" style='padding-left:0px;'>
-							<?php var_dump($this->request->data['User']['birthday']); ?>
 							<label>Birthday*</label>
 							<div class="input-group"  id='user_birthday' data-date-format="YYYY-MM-DD">
-								<input type="text" name='birthday' class="form-control" data-date-format="YYYY-MM-DD">
+								<input type="text" name='birthday' value="<?php echo $this->request->data['User']['birthday']; ?>" class="form-control" data-date-format="YYYY-MM-DD">
 								<div class="input-group-btn">
 									<button class="btn btn-default" type='button'>
 										<i class="fa fa-calendar"></i>
@@ -68,7 +67,7 @@
 					
 					<div class="form-group">
 						<label>Hobby</label>
-						<textarea name="hobby" id="" cols="30" rows="10" class="form-control"></textarea>
+						<textarea name="hobby" id="" cols="30" rows="10" class="form-control"><?php echo $this->request->data['User']['hobby']; ?></textarea>
 					</div>
 					
 					<div class="form-group">

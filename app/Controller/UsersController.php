@@ -124,11 +124,11 @@ class UsersController extends AppController{
    						)
    					);
    			$this->User->save($user);
-
+   			
    			$user = $this->User->findById($this->User->id);
-
+   			
    			$this->Session->write('profile',$user['User']);
-
+   			
    			$this->User->id = $user['User']['id'];
 			$this->User->save(array('User'=>array('last_login_time'=>date('Y-m-d H:i:s'))));
 			die(json_encode(array('error'=>false,'content'=>'success')));
