@@ -1,5 +1,6 @@
 <div class='col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1'>
-	<div class="clearfix">
+	
+	<header class="clearfix">
 		<!-- upper row -->
 		<div class="row upper-row">
 			<div class="col-xs-8">
@@ -39,7 +40,7 @@
 			</div>
 		</div>
 		<!-- /. -->
-	</div>
+	</header>
 	
 	<hr>
 
@@ -90,6 +91,12 @@
 			</div>
 		</div>
 	</div>
-		
+	
+	<footer class='threadFooter text-center'>
+		<hr>
+		<button class="btn btn-default">
+			Show More
+		</button>
+	</footer>
 	
 </div>
