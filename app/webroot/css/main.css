@@ -32,6 +32,7 @@
 }
 .threadContainer .content .message {
   padding: 10px;
+  min-height: 70px;
 }
 .threadContainer .content .time {
   padding: 5px;
@@ -76,4 +77,7 @@ textarea {
   width: 30px;
   height: 30px;
   margin-right: 20px;
+}
+[ng-cloak] {
+  display: none;
 }

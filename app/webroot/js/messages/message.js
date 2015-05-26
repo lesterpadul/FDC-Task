@@ -17,7 +17,7 @@ function formatState(state){
 	var value  = $(state.element).attr('value');
 	var imgSrc = $(state.element).attr('img-src');
 	var label  = $(state.element).html();
-
+	
 	if(imgSrc!='') {
 
 	} else {

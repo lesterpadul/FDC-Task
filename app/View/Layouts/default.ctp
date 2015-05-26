@@ -18,7 +18,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 ?>
 <!DOCTYPE html>
-<html base-url='<?php echo $base_url; ?>'>
+<html base-url='<?php echo $base_url; ?>' ng-app='messanger'>
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
@@ -92,8 +92,15 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	
 	<!-- main content -->
 	<div class='container'>
-		<?php 
-			echo $this->Session->flash();
+		<div class="row">
+			<div class="col-xs-offset-1 col-xs-10">
+			<?php 
+				echo $this->Session->flash();
+			?>
+			</div>
+		</div>
+
+		<?php
 			echo $this->fetch('content'); 
 		?>
 	</div>

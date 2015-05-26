@@ -1,6 +1,13 @@
 <?php 
 class UsersController extends AppController{
 	public $helpers = array('Html','Form');
+    public $hasMany = array(
+    					'Message'=>array(
+    						'className'=>'Message',
+    						'conditions'=>'Message.from_id = User.id',
+    						'order' => 'Message.created DESC'
+    					)
+    				);
 
 	/**
 	 * [initialize description]
@@ -111,20 +118,16 @@ class UsersController extends AppController{
 
 			if(count($error)==0):
 				if($this->User->save($this->request->data)):
-					$this->Session->setFlash('Sucess!');
-					$user = $this->User->findById($userId);
+					$this->Session->setFlash('Success!','default',array('class'=>'alert alert-success'));
+
+					$user = $this->User->findById($userId);	
 					$this->Session->write('profile',$user['User']);
 					$this->redirect(array('controller'=>'users','action'=>'view',$userId));
 				else:
-					$error [] = $this->User->validationErrors;
+					$error[] = $this->User->validationErrors;
 				endif;
 			endif;
-
-			if(count($error)!==0):
-				var_dump($error);
-				die();
-			endif;
-
+			
     	endif;
 
 		$this->data['styles'][]         = 'css/main.css';

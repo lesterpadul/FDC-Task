@@ -44,7 +44,11 @@ class AppController extends Controller {
 									'bower_components/momentjs/moment.js',
 									'bower_components/datetimepicker/build/js/bootstrap-datetimepicker.min.js',
 									'bower_components/bootstrapvalidator/dist/js/bootstrapValidator.js',
-									'bower_components/select2/dist/js/select2.full.js'
+									'bower_components/select2/dist/js/select2.full.js',
+									'bower_components/angular/angular.js',
+									'ng/app.js',
+									'ng/controller.js',
+									'ng/service.js'
 								);
 
 		$this->data['styles']         = array(

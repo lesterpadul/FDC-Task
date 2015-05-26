@@ -1,4 +1,4 @@
-<div class='col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1'>
+<div class='col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1' ng-controller='MessangerList' ng-cloak>
 	
 	<header class="clearfix">
 		<!-- upper row -->
@@ -12,13 +12,13 @@
 						</button>
 						<ul class="dropdown-menu"  >
 							<li>	
-								<a href="#">
+								<a ng-click='thread.searchTerm="user"; ' href='javascript:void(0);'>
 									<i class="fa fa-user"></i>
 									&nbsp;User
 								</a>
 							</li>
 							<li>
-								<a href="#">
+								<a ng-click='thread.searchTerm="message"; ' href='javascript:void(0);'>
 									<i class="fa fa-envelope"></i>
 									&nbsp;Message
 								</a>
@@ -26,7 +26,7 @@
 						</ul>
 					</div>
 					<div class="input-group-btn">
-						<button class="btn btn-default">
+						<button class="btn btn-default" ng-click='loadThreads();'>
 							<i class="fa fa-search"></i>
 						</button>
 					</div>
@@ -44,50 +44,19 @@
 	
 	<hr>
 
-	<div class="threadContainer clearfix">
-		<div class="col-xs-2 avatar" style='background:url(<?php echo $base_url.'public/images/users/default.jpg'; ?>) center; background-size:cover;'>
-			
-		</div>
 
-		<div class="col-xs-10 content">
-			<div class="message">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima a, accusamus eius velit. Veniam sint provident voluptatem dignissimos dolores error necessitatibus aut pariatur voluptates, nisi placeat earum ut magnam quia.
-			</div>
-			<div class="time text-right">
-				<i class="fa fa-clock-o"></i>
-				May 26, 2015
-			</div>
-		</div>
-	</div>
+	<div class='threadMain' >
+		<div class="threadContainer clearfix" ng-repeat='thread in threads track by $index' ng-click='navigateToConversation(thread.User.userId);'>
+			<div class="col-xs-2 avatar" style='background:url({{getThreadAvatar(thread.User);}}) center; background-size:cover; background-color: #ccc; '></div>
 
-	<div class="threadContainer clearfix">
-		<div class="col-xs-2 avatar"  style='background:url(<?php echo $base_url.'public/images/users/images1432626402.jpg'; ?>) center; background-size:cover;'>
-			
-		</div>
-
-		<div class="col-xs-10 content">
-			<div class="message">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima a, accusamus eius velit. Veniam sint provident voluptatem dignissimos dolores error necessitatibus aut pariatur voluptates, nisi placeat earum ut magnam quia.
-			</div>
-			<div class="time text-right">
-				<i class="fa fa-clock-o"></i>
-				May 26, 2015
-			</div>
-		</div>
-	</div>
-
-	<div class="threadContainer clearfix">
-		<div class="col-xs-2 avatar"  style='background:url(<?php echo $base_url.'public/images/users/default.jpg'; ?>) center; background-size:cover;'>
-			
-		</div>
-
-		<div class="col-xs-10 content">
-			<div class="message">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima a, accusamus eius velit. Veniam sint provident voluptatem dignissimos dolores error necessitatibus aut pariatur voluptates, nisi placeat earum ut magnam quia.
-			</div>
-			<div class="time text-right">
-				<i class="fa fa-clock-o"></i>
-				May 26, 2015
+			<div class="col-xs-10 content">
+				<div class="message">
+					{{thread.Message.content}}
+				</div>
+				<div class="time text-right">
+					<i class="fa fa-clock-o"></i>
+					{{thread.Message.created}}
+				</div>
 			</div>
 		</div>
 	</div>
