@@ -1,9 +1,13 @@
 <div class="panel panel-info">
   	<div class="panel-heading">
-		<h3>User Edit</h3>
+		<h3>
+			<?php echo $this->Html->link($this->request->data['User']['name'],array('controller'=>'users','action'=>'view',$this->request->data['User']['id']),array('class'=>'userLink')); ?>
+			/
+			User Edit
+		</h3>
   	</div>
   	<div class="panel-body">
-	
+		
 		<?php 
 			echo $this->Form->create('User',array('class'=>'form-horizontal','enctype'=>'multipart/form-data','id'=>'UpdateUserForm'));
 		?>

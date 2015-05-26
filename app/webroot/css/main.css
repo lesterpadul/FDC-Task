@@ -46,3 +46,16 @@
   border-radius: 0px !important;
   color: white;
 }
+.panel .panel-heading .userLink {
+  color: #fff;
+}
+input,
+textarea {
+  border-radius: 0px !important;
+}
+textarea {
+  resize: none;
+}
+.btn {
+  border-radius: 0px !important;
+}
