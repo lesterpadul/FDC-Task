@@ -94,7 +94,7 @@ $(document).ready(function(){
       	}
   	})
 	.on("success.form.bv",function(e){
-		REGISTER_USER($('#register_user_btn'));
+		registerUser($('#register_user_btn'));
 		return false;
 	});
 
@@ -105,7 +105,7 @@ $(document).ready(function(){
  * [LOGIN_USER description]
  * @param {[type]} obj [description]
  */
-function LOGIN_USER(obj){
+function loginUser(obj){
 	var ser    = $('#UserLoginForm').serialize();
 	var action = $('#UserLoginForm').attr('action');
 
@@ -115,9 +115,9 @@ function LOGIN_USER(obj){
 	$.post(base_url+action,ser,function(data){
 		console.log(data);
 		if(!data.error){
-			window.location.href=base_url+'home/index';
+			window.location.href=base_url+'messages/index';
 		}else{
-			SET_LABEL('Incorrect Details','alert-danger');
+			setLabel('Incorrect Details','alert-danger');
 		}
 		$(obj).removeAttr('disabled');
 	},'json').fail(function(x){
@@ -132,10 +132,10 @@ function LOGIN_USER(obj){
  * @param {[type]} $type    [description]
  * @param {[type]} $hide    [description]
  */
-function SET_LABEL($content,$type,$hide){
-	if($hide){
+function setLabel($content,$type,$hide){
+	if($hide) {
 		$("#alertContainerIndex").hide();
-	}else{
+	} else {
 		$("#alertContainerIndex")
 		.attr('class','alert')
 		.html($content)
@@ -144,7 +144,7 @@ function SET_LABEL($content,$type,$hide){
 	}
 }
 
-function REGISTER_USER(obj){
+function registerUser(obj){
 	var ser    = $('#RegisterUserForm').serialize();
 	var action = $('#RegisterUserForm').attr('action');
 

@@ -66,7 +66,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			<ul class="nav navbar-nav navbar-right">
 
 				<li>
-					<a href="#">
+					<a href="<?php echo $base_url.'messages/index'; ?>">
 						<i class="fa fa-envelope"></i>&nbsp;Messages
 					</a>
 				</li>

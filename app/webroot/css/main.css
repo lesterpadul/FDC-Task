@@ -1,0 +1,48 @@
+.upper-row .btn {
+  border-radius: 0px;
+}
+.upper-row .btn:focus {
+  outline: none;
+}
+.upper-row input {
+  border-radius: 0px;
+}
+.upper-row input:focus {
+  outline: none;
+  box-shadow: none;
+  border: 1px solid #ccc;
+}
+.upper-row input:active {
+  outline: none;
+}
+.threadContainer {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.threadContainer [class^='col'] {
+  padding: 0px;
+}
+.threadContainer .avatar {
+  background-color: #ccc;
+  height: 90px;
+}
+.threadContainer .content {
+  background-color: #1ab188;
+  color: #fff;
+}
+.threadContainer .content .message {
+  padding: 10px;
+}
+.threadContainer .content .time {
+  padding: 5px;
+}
+.panel {
+  border: 1px solid #1ab188;
+  border-radius: 0px;
+}
+.panel .panel-heading {
+  background-color: #1ab188 !important;
+  background-image: none !important;
+  border-radius: 0px !important;
+  color: white;
+}

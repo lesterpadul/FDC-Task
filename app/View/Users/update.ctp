@@ -1,6 +1,6 @@
 <div class="panel panel-info">
   	<div class="panel-heading">
-		<h3 class="panel-title">User Edit</h3>
+		<h3>User Edit</h3>
   	</div>
   	<div class="panel-body">
 	
@@ -92,8 +92,13 @@
 					</div>
 					
 					<div class="form-group">
-						<button class="btn btn-primary btn-block">
-							SAVE
+						<button class="btn btn-default btn-block clearfix">
+							<span class="pull-left">
+								<i class="fa fa-save"></i>
+							</span>
+							<span class="pull-right">
+								SAVE
+							</span>
 						</button>
 					</div>
 					

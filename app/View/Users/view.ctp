@@ -5,7 +5,10 @@
 				User Profile
 			</h3>
 			<div class="pull-right">
-				<a href="<?php echo $base_url.'users/update/'.$user['User']['id']; ?>" class='btn btn-primary'>Update</a>
+				<a href="<?php echo $base_url.'users/update/'.$user['User']['id']; ?>" class='btn btn-default'>
+          <i class="fa fa-pencil"></i>
+          &nbsp;Update
+        </a>
 			</div>
 		</div>
   	</div>

@@ -59,6 +59,7 @@ class UsersController extends AppController{
     public function view($userId){
     	$this->initialize();
     	$user = $this->User->findById($userId);
+    	$this->data['styles'][] = 'css/main.css';
     	$this->set($this->data);
     	$this->set('user',$user);
     }
@@ -119,7 +120,9 @@ class UsersController extends AppController{
 
     	endif;
 
-    	$this->data['header_scripts'][] = 'js/users/update.js';
+		$this->data['styles'][]         = 'css/main.css';
+		$this->data['header_scripts'][] = 'js/users/update.js';
+		
     	$user = $this->User->findById($userId);
 		$this->set($this->data);
 		$this->request->data = $user;
