@@ -8,15 +8,24 @@ $(document).ready(function(){
 function declareRecipientData(){
 	if($("select[name='to']").length!==0) {
 		$("select[name='to']").select2({
-			//templateResult: formatState
+			templateResult: formatState
 		});
 	}
 }
 
 function formatState(state){
-	console.log(state);
-	/*var $state = $(
-				    '<span><img src="vendor/images/flags/' + state.element.value.toLowerCase() + '.png" class="img-flag" /> ' + state.text + '</span>'
-				);*/
- 	//return $state;
+	var value  = $(state.element).attr('value');
+	var imgSrc = $(state.element).attr('img-src');
+	var label  = $(state.element).html();
+
+	if(imgSrc!='') {
+
+	} else {
+		imgSrc = 'default.jpg';
+	}
+	
+	var $state = $(
+				    '<span class="optionContainer clearfix"><div class="avatar pull-left" style="background:url('+ base_url + 'public/images/users/'+ imgSrc +') center; background-size:cover;"></div> <div class="pull-left">' + state.text + '</div></span>'
+				);
+ 	return $state;
 }

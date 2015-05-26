@@ -14,6 +14,8 @@
 						<label>
 							Recipient
 						</label>
+
+						<!-- select -->
 						<select name="to" id="" class="form-control">
 							<?php 
 								if(count($recipients)!==0) {
@@ -25,6 +27,9 @@
 								}	
 							?>
 						</select>
+						<!-- /. -->
+
+
 					</div>
 					<div class="form-group">
 						<label>
