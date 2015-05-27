@@ -54,7 +54,7 @@ class AppController extends Controller {
 									'ng/directive.js'
 								);
 		
-		$this->data['styles']         = array(
+		$this->data['styles']        = array(
 									'bower_components/bootstrap/dist/css/bootstrap.css',
 									'bower_components/bootstrap/dist/css/bootstrap-theme.css',
 									'bower_components/fontawesome/css/font-awesome.css',
@@ -66,8 +66,10 @@ class AppController extends Controller {
 		
 		$this->data['base_url']     = "http://fdc.dev/";
 		$this->data['landing_page'] = false;
-		
-		
-	}	
-		
+	}
+
+	public function checkIfLoggedIn(){
+			
+	}
+
 }
