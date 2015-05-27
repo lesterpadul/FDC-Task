@@ -57,11 +57,7 @@ $(document).ready(function(){
                       	message: 'Name is required and cannot be empty'
                   	},
                   	stringLength: {
-                  		max:20,
-                  		message:"Name must be, at most, 20 characters in length!"
-                  	},
-                  	stringLength: {
-                  		min:6,
+                  		min:5,
                   		message:"Name must be, at least, 5 characters in length!"
                   	}
               	}

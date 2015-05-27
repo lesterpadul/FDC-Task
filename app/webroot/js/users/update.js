@@ -24,10 +24,6 @@ $(document).ready(function(){
                     stringLength: {
                       min:5,
                       message:"Name must be, at least, 5 characters in length!"
-                    },
-                    stringLength: {
-                      max:20,
-                      message:"Name must be, at most, 20 characters in length!"
                     }
               	}
           	},
@@ -79,8 +75,10 @@ $(document).ready(function(){
       	}
   	})
 	.on("success.form.bv",function(e){
-		//submit the form by default
+    
+		//submit the form using its default functionality
 		$(e.target).data('bootstrapValidator').defaultSubmit();
+    
 	});
 
 });
