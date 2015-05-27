@@ -81,7 +81,7 @@
           </div>
           
           <?php
-            echo $this->Form->button('Log In',array('class'=>'button button-block','onclick'=>'loginUser(this);'));
+            echo $this->Form->button('Log In',array('class'=>'button button-block','onclick'=>'loginUser(this);','type'=>'button'));
             echo $this->Form->end();
           ?>
           

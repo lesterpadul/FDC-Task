@@ -162,13 +162,15 @@ function registerUser(obj){
 
 	//validate the field here	
 	$.post(action,ser,function(data){
-		console.log(data);
+
 		if(!data.error){
 			window.location.href=base_url+'index/finalStep';
 		}else{
-			SET_LABEL('Incorrect Details','alert-danger');
+			setLabel('Incorrect Details','alert-danger');
 		}
+
 		$(obj).removeAttr('disabled');
+		
 	},'json').fail(function(x){
 		$(obj).removeAttr('disabled');
 		console.log(x.responseText);
