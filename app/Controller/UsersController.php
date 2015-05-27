@@ -96,7 +96,7 @@ class UsersController extends AppController{
 			$this->request->data['User']['hobby']       = $this->request->data['hobby'];
 			$this->request->data['User']['modified_ip'] = $this->request->clientIp();
 
-			if(!empty($_FILES['image']['name'])):
+			if(!empty($_FILES['image']['name'])) {
 				$ext           =  strtolower(pathinfo($_FILES["image"]["name"], PATHINFO_EXTENSION)); #get extension
 				$name          = explode('.',basename($_FILES['image']['name']))[0].time();
 				$allowed_types = array("gif","jpg","jpeg","png","tmp");
@@ -107,14 +107,15 @@ class UsersController extends AppController{
 
 				$img_name = $name.'.'.$ext;
 
-				if(move_uploaded_file($_FILES['image']['tmp_name'],WWW_ROOT.'public/images/users/'.$img_name)):
-					$this->User->id = $userId;
-					$this->User->save(array('User'=>array('image'=>$img_name)));
-				else:
-					$error[] = 'upload_error';
-				endif;
-
-			endif;
+				if(count($error)==0) {
+					if(move_uploaded_file($_FILES['image']['tmp_name'],WWW_ROOT.'public/images/users/'.$img_name)):
+						$this->User->id = $userId;
+						$this->User->save(array('User'=>array('image'=>$img_name)));
+					else:
+						$error[] = 'upload_error';
+					endif;
+				}
+			}
 
 			if(count($error)==0) {
 

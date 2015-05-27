@@ -36,7 +36,7 @@ class AppController extends Controller {
 	public $helpers = array('Html','Form');
 
 	public function initialize(){
-
+		
 		$this->data['header_scripts'] = array(
 									'bower_components/jquery/dist/jquery.js',
 									'bower_components/bootstrap/dist/js/bootstrap.js',
@@ -53,7 +53,7 @@ class AppController extends Controller {
 									'ng/service.js',
 									'ng/directive.js'
 								);
-
+		
 		$this->data['styles']         = array(
 									'bower_components/bootstrap/dist/css/bootstrap.css',
 									'bower_components/bootstrap/dist/css/bootstrap-theme.css',
@@ -66,6 +66,7 @@ class AppController extends Controller {
 		
 		$this->data['base_url']     = "http://fdc.dev/";
 		$this->data['landing_page'] = false;
+		
 	}	
 		
 }

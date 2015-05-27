@@ -12,6 +12,7 @@
 					Proceed to home page!
 				</a>
 			</div>
+			
 		</div>
 	</div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->

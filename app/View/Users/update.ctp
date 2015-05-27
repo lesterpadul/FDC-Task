@@ -6,8 +6,20 @@
 			</h3>
 	  	</div>
 	  	<div class="panel-body">
-			
 			<?php 
+
+				if(count(@$validationError)!==0) {
+					echo "<div class='alert alert-danger'><ul>";
+					foreach($validationError as $error) {
+						if($error=="invalid_type"):
+							echo "<li>Invalid File Type!</li>";
+						elseif($error=="upload_error"):
+							echo "<li>An error occurred during the upload!</li>";
+						endif;
+					}
+					echo "</ul></div>";
+				}
+
 				echo $this->Form->create('User',array('class'=>'form-horizontal','enctype'=>'multipart/form-data','id'=>'UpdateUserForm'));
 			?>
 				<div class="clearfix">
