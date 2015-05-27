@@ -2,7 +2,7 @@
 class Message extends AppModel{
 	
 
-	public $validate = array(
+/*	public $validate = array(
 			'content'=>array(
 				"contentMustNotBeEmpty"=>array(
 					"rule"    => "notEmpty",
@@ -17,6 +17,6 @@ class Message extends AppModel{
 					"required"=> true
 				)
 			)
-		);
+		);*/
 	
 }

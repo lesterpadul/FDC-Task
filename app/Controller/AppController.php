@@ -67,6 +67,7 @@ class AppController extends Controller {
 		$this->data['base_url']     = "http://fdc.dev/";
 		$this->data['landing_page'] = false;
 		
+		
 	}	
 		
 }
