@@ -7,7 +7,7 @@
 	  	</div>
 	  	<div class="panel-body">
 			<?php 
-
+				
 				if(count(@$validationError)!==0) {
 					echo "<div class='alert alert-danger'><ul>";
 					foreach($validationError as $error) {

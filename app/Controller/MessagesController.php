@@ -20,12 +20,16 @@ class MessagesController extends AppController{
 		MessagesController::initialize();	
 		
 		if($this->request->is(array('post','put'))):
+
 			$this->Message->create();
 			$this->request->data['from_id'] = $this->Session->read('profile')['id'];
-			if($this->Message->save($this->request->data)) {
+
+			if($this->Message->validates()) {
+				$this->Message->save($this->request->data);
 				$this->Session->setFlash('Message sent!','default',array('class'=>'alert alert-success'));
 				$this->redirect(array('controller'=>'messages','action'=>'index'));
 			} else {
+				$this->set('validationErrors',$this->Message->validationErrors);
 				$this->Session->setFlash('Message not sent!','default',array('class'=>'alert alert-danger'));
 			}
 		endif;
@@ -34,7 +38,6 @@ class MessagesController extends AppController{
 		$recipients = $this->User->find('all',array('conditions'=>array('User.id !='=>$profile['id'])));
 
 		$this->set('recipients',$recipients);
-
 	}
 
 	public function getThreads(){

@@ -8,6 +8,21 @@
 			</h3>
 		</div>
 		<div class="panel-body clearfix">
+
+			<?php 
+				if(count(@$validationErrors)!==0):
+				echo "<div class='alert alert-danger'><ul>";
+					foreach($validationErrors as $error):
+						if(count($error)!==0):
+							foreach($error as $e):
+								echo "<li>{$e}</li>";
+							endforeach;
+						endif;
+					endforeach;
+				echo "</ul></div>";
+				endif;
+			?>
+
 			<div class="col-xs-12">
 				<form action="" method="POST" class="form-horizontal" role="form">
 					<div class="form-group">
