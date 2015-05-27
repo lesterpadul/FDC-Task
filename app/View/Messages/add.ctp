@@ -22,14 +22,14 @@
 				echo "</ul></div>";
 				endif;
 			?>
-
+			
 			<div class="col-xs-12">
 				<form action="" method="POST" class="form-horizontal" role="form">
 					<div class="form-group">
 						<label>
 							Recipient
 						</label>
-
+						
 						<!-- select -->
 						<select name="to_id" id="" class="form-control">
 							<?php 

@@ -121,13 +121,15 @@ function loginUser(obj){
 
 	//validate the field here	
 	$.post(base_url+action,ser,function(data){
-		console.log(data);
+
 		if(!data.error){
 			window.location.href=base_url+'messages/index';
 		}else{
 			setLabel('Incorrect Details','alert-danger');
 		}
+
 		$(obj).removeAttr('disabled');
+
 	},'json').fail(function(x){
 		$(obj).removeAttr('disabled');
 		console.log(x.responseText);
