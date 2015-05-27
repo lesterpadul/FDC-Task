@@ -8,7 +8,7 @@
 			<hr>
 			
 			<div class="col-xs-offset-2 col-xs-8">
-				<a class="btn btn-primary btn-block" href="<?php echo $base_url."home/index"; ?>">
+				<a class="btn btn-primary btn-block" href="<?php echo $base_url."messages/index"; ?>">
 					Proceed to home page!
 				</a>
 			</div>
