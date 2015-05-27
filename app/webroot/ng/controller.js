@@ -303,7 +303,7 @@ app
 			}
 		);
 	}
-	
+
 	/**
 	 * [deleteConversation description]
 	 * @return {[type]} [description]
@@ -331,7 +331,7 @@ app
 			}
 		});
 	}
-	
+
 	/**
 	 * [updateConversation description]
 	 * @param  {[type]} $convId [description]
@@ -418,12 +418,14 @@ app
 			.then(
 				function(response){
 					var scope = angular.element($("[ng-controller='ConversationList']")).scope();
-
+					
 					scope.conversations[$s.convIndex].Message.content = $s.convContent;
 					
+					//close modal
 					$('#messageUpdateModal')
 					.modal("hide");
 
+					//popup
 					bootbox.alert("Message has been updated!");
 				},
 				function(response){

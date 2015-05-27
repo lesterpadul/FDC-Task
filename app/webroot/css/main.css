@@ -128,3 +128,13 @@ textarea {
 .well {
   border-radius: 0px;
 }
+.fdc-general-empty {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.fdc-general-empty i {
+  font-size: 50px;
+}
+.fdc-general-empty p {
+  padding-top: 20px;
+}

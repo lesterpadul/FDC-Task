@@ -1,6 +1,7 @@
 'use strict'
+var base_url = $('html').attr("base-url");
 $(document).ready(function(){
-
+  base_url = $('html').attr("base-url");
 	//check if the birthday field exists
 	if($('#userBirthday').length!==0) {
 		$('#userBirthday').datetimepicker(); //declare datetimepicker
@@ -20,14 +21,14 @@ $(document).ready(function(){
                   	notEmpty: {
                       	message: 'Name is required and cannot be empty'
                   	},
-                    /*stringLength: {
-                      max:20,
-                      message:"Name must be, at most, 20 characters in length!"
+                    stringLength: {
+                      min:5,
+                      message:"Name must be, at least, 5 characters in length!"
                     },
                     stringLength: {
-                      min:6,
-                      message:"Name must be, at least, 5 characters in length!"
-                    }*/
+                      max:20,
+                      message:"Name must be, at most, 20 characters in length!"
+                    }
               	}
           	},
           	'birthday': {
@@ -51,7 +52,12 @@ $(document).ready(function(){
           	  		},
           	  		emailAddress: {
           	  			message : "This must be a valid email address!"
-          	  		}	
+          	  		},
+                  remote: {
+                    message: "Email is already in use.",
+                    url:base_url+'messages/checkEmailExistence',
+                    type:"GET"
+                  }
           		}
           	},
           	'password':{

@@ -73,7 +73,12 @@ $(document).ready(function(){
           	  		},
           	  		emailAddress: {
           	  			message : "This must be a valid email address!"
-          	  		}
+          	  		},
+                  	remote: {
+                    	message: "Email is already in use.",
+                    	url:base_url+'messages/checkEmailExistence',
+                    	type:"GET"
+                  	}
           		}
           	},
           	'password':{
