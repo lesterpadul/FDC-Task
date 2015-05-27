@@ -37,6 +37,28 @@
 .threadContainer .content .time {
   padding: 5px;
 }
+.threadContainerOutgoing {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.threadContainerOutgoing [class^='col'] {
+  padding: 0px;
+}
+.threadContainerOutgoing .avatar {
+  background-color: #ccc;
+  height: 90px;
+}
+.threadContainerOutgoing .content {
+  background-color: #1ab188;
+  color: #fff;
+}
+.threadContainerOutgoing .content .message {
+  padding: 10px;
+  min-height: 70px;
+}
+.threadContainerOutgoing .content .time {
+  padding: 5px;
+}
 .threadFooter {
   padding-top: 20px;
 }

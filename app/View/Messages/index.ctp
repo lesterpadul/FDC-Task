@@ -43,20 +43,18 @@
 	</header>
 	
 	<hr>
-
+	
 	<div class='threadMain' ng-show='!loading'>
 		<div class="threadContainer clearfix" ng-repeat='thread in threads track by $index' ng-click='navigateToConversation(thread.User.userId);'>
 			<div class="col-xs-2 avatar" style='background:url({{getThreadAvatar(thread.User);}}) center; background-size:cover; background-color: #ccc; '></div>
 
 			<div class="col-xs-10 content">
 				<div class="message">
-					{{thread.Message.id}} {{thread.Message.to_id}}
-
 					{{thread.Message.content}}
 				</div>
 				<div class="time text-right">
 					<i class="fa fa-clock-o"></i>
-					{{thread.Message.created}}
+					{{formatDate(thread.Message.created)}}
 				</div>
 			</div>
 		</div>

@@ -19,13 +19,9 @@ class MessagesController extends AppController{
 		
 		if($this->request->is(array('post','put'))):
 			$this->Message->create();
-			
 			$this->request->data['from_id'] = $this->Session->read('profile')['id'];
-			
 			if($this->Message->save($this->request->data)) {
-				
 				$this->Session->setFlash('Message sent!','default',array('class'=>'alert alert-success'));
-
 				$this->redirect(array('controller'=>'messages','action'=>'index'));
 			} else {
 				$this->Session->setFlash('Message not sent!','default',array('class'=>'alert alert-danger'));
@@ -36,6 +32,7 @@ class MessagesController extends AppController{
 		$recipients = $this->User->find('all',array('conditions'=>array('User.id !='=>$profile['id'])));
 
 		$this->set('recipients',$recipients);
+
 	}
 
 	public function getThreads(){
@@ -72,8 +69,8 @@ class MessagesController extends AppController{
 												'order' => 'Message.id DESC',
 												'conditions' => array(
 													'OR'=>array(
-															'Message.to_id'=>$profile['id'],
-															'Message.from_id'=>$profile['id']
+															'Message.to_id'   =>$profile['id'],
+															'Message.from_id' =>$profile['id']
 														),
 													$likeSearch
 												),
@@ -122,8 +119,8 @@ class MessagesController extends AppController{
 												'order' => 'Message.id DESC',
 												'conditions' => array(
 													'OR'=>array(
-															'Message.to_id'=>$profile['id'],
-															'Message.from_id'=>$profile['id']
+															'Message.to_id'   =>$profile['id'],
+															'Message.from_id' =>$profile['id']
 														),
 													'AND'=>$andQuery,
 													$likeSearch
@@ -134,9 +131,72 @@ class MessagesController extends AppController{
 
 		die(json_encode(array("error"=>false,"content"=>$threads)));
 	}
-		
+	
 	public function conversation($userId){
 		MessagesController::initialize();
+		$profile     = $this->Session->read('profile');
+		$this->set('recipientId',$userId);
+		$this->set('profileId',$profile['id']);
+	}
+
+	public function getConversation(){
+		$perPage     = (int) $this->params->query['perPage'];
+		$profile     = $this->Session->read('profile');
+		$recipientId = $this->params->query['recipientId'];
+
+		$threads = $this->Message->find('all',
+											array(
+												'joins' => array(
+											        array(
+											            'table' => 'users',
+											            'alias' => 'User',
+											            'type' => 'left',
+											            'conditions' => array(
+											                'User.id = Message.to_id'
+											            )
+											        )
+											    ),
+												'fields' => array('User.name','User.image','User.id as userId', 'Message.*'),
+												'order' => 'Message.id DESC',
+												'conditions' => array(
+															"(Message.to_id={$recipientId} OR Message.from_id={$recipientId}) AND (Message.to_id={$profile['id']} OR Message.from_id={$profile['id']})"
+												),
+												'limit'=>$perPage
+											)
+										);
+
+		die(json_encode(array("error"=>false,"content"=>$threads)));
+	}
+
+	public function getMoreConversations(){
+		$perPage     = (int) $this->params->query['perPage'];
+		$profile     = $this->Session->read('profile');
+		$recipientId = $this->params->query['recipientId'];
+		$lastId      = $this->params->query['lastId'];
+
+		$threads = $this->Message->find('all',
+											array(
+												'joins' => array(
+											        array(
+											            'table' => 'users',
+											            'alias' => 'User',
+											            'type' => 'left',
+											            'conditions' => array(
+											                'User.id = Message.to_id'
+											            )
+											        )
+											    ),
+												'fields' => array('User.name','User.image','User.id as userId', 'Message.*'),
+												'order' => 'Message.id DESC',
+												'conditions' => array(
+															"(Message.to_id={$recipientId} OR Message.from_id={$recipientId}) AND (Message.to_id={$profile['id']} OR Message.from_id={$profile['id']})",
+															"Message.id < {$lastId}"
+												),
+												'limit'=>$perPage
+											)
+										);
+		
+		die(json_encode(array("error"=>false,"content"=>$threads)));
 	}
 	
 }
