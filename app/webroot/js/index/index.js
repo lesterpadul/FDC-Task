@@ -46,8 +46,7 @@ $(document).ready(function(){
 	  $(target).fadeIn(600);
 	  
 	});
-
-
+	
 	//validate the addition of payments
 	$("#RegisterUserForm").bootstrapValidator({
 		excluded: [':disabled', ':hidden', ':not(:visible)'],
@@ -56,6 +55,14 @@ $(document).ready(function(){
               	validators: {
                   	notEmpty: {
                       	message: 'Name is required and cannot be empty'
+                  	},
+                  	stringLength: {
+                  		max:20,
+                  		message:"Name must be, at most, 20 characters in length!"
+                  	},
+                  	stringLength: {
+                  		min:6,
+                  		message:"Name must be, at least, 5 characters in length!"
                   	}
               	}
           	},
@@ -66,7 +73,7 @@ $(document).ready(function(){
           	  		},
           	  		emailAddress: {
           	  			message : "This must be a valid email address!"
-          	  		}	
+          	  		}
           		}
           	},
           	'password':{
@@ -154,7 +161,7 @@ function registerUser(obj){
 	$.post(action,ser,function(data){
 		console.log(data);
 		if(!data.error){
-			window.location.href=base_url+'home/index';
+			window.location.href=base_url+'index/finalStep';
 		}else{
 			SET_LABEL('Incorrect Details','alert-danger');
 		}
@@ -163,5 +170,4 @@ function registerUser(obj){
 		$(obj).removeAttr('disabled');
 		console.log(x.responseText);
 	});
-
 }

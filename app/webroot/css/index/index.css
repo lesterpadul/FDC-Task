@@ -184,3 +184,16 @@ textarea {
   margin-top: -20px;
   text-align: right;
 }
+
+
+.modal-dialog{
+  border-radius:0px !important;
+}
+
+.modal-dialog h1{
+  color:#1ab188;
+}
+
+.modal-dialog .modal-body{
+  border-radius:0px !important;
+}

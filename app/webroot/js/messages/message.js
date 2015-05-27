@@ -6,8 +6,8 @@ $(document).ready(function(){
 });
 
 function declareRecipientData(){
-	if($("select[name='to']").length!==0) {
-		$("select[name='to']").select2({
+	if($("select[name='to_id']").length!==0) {
+		$("select[name='to_id']").select2({
 			templateResult: formatState
 		});
 	}
@@ -27,5 +27,6 @@ function formatState(state){
 	var $state = $(
 				    '<span class="optionContainer clearfix"><div class="avatar pull-left" style="background:url('+ base_url + 'public/images/users/'+ imgSrc +') center; background-size:cover;"></div> <div class="pull-left">' + state.text + '</div></span>'
 				);
+	
  	return $state;
 }
