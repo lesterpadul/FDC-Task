@@ -41,8 +41,19 @@ class MessagesController extends AppController{
 	public function getThreads(){
 		MessagesController::initialize();
 
-		$profile = $this->Session->read('profile');
-		$perPage = (int) $this->params->query['perPage'];
+		$profile    = $this->Session->read('profile');
+		$perPage    = (int) $this->params->query['perPage'];
+		$category   = $this->params->query['category'];
+		$searchTerm = $this->params->query['searchTerm'];
+
+
+		$likeSearch = "";
+
+		if($category == "user") {
+			$likeSearch = "User.name like '%{$searchTerm}%'";
+		} else {
+			$likeSearch = "Message.content like '%{$searchTerm}%'";
+		}
 
 		$threads = $this->Message->find('all',
 											array(
@@ -64,24 +75,36 @@ class MessagesController extends AppController{
 															'Message.to_id'=>$profile['id'],
 															'Message.from_id'=>$profile['id']
 														),
+													$likeSearch
 												),
 												'limit'=>$perPage
 											)
 										);
 
-		#debug($threads);
 		die(json_encode(array('error'=>false,'content'=>$threads)));
 	}
 
 	public function getMoreThreads(){
 		MessagesController::initialize();
 
-		$lastId  = $this->params->query['lastId'];
-		$perPage = (int) $this->params->query['perPage'];
+		$lastId     = $this->params->query['lastId'];
+		$perPage    = (int) $this->params->query['perPage'];
+		$category   = $this->params->query['category'];
+		$searchTerm = $this->params->query['searchTerm'];
 
+		
+		$andQuery                 = array();
+		$andQuery['Message.id <'] = $lastId;
+
+		$likeSearch = "";
+
+		if($category == "user") {
+			$likeSearch = "User.name like '%{$searchTerm}%'";
+		} else {
+			$likeSearch = "Message.content like '%{$searchTerm}%'";
+		}
 
 		$profile = $this->Session->read('profile');
-
 		$threads = $this->Message->find('all',
 											array(
 												'joins' => array(
@@ -102,9 +125,8 @@ class MessagesController extends AppController{
 															'Message.to_id'=>$profile['id'],
 															'Message.from_id'=>$profile['id']
 														),
-													'AND'=>array(
-															'Message.id <'=>$lastId
-														)
+													'AND'=>$andQuery,
+													$likeSearch
 												),
 												'limit'=>$perPage
 											)

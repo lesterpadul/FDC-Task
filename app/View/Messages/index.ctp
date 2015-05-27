@@ -5,20 +5,20 @@
 		<div class="row upper-row">
 			<div class="col-xs-8">
 				<div class="input-group">
-					<input type="text" class="form-control" placeholder='Search...'>
+					<input type="text" ng-model="thread.searchTerm" class="form-control" placeholder='Search...'>
 					<div class="input-group-btn dropdown">
 						<button class="btn btn-default  dropdown-toggle" data-toggle="dropdown">
 							<i class="fa fa-caret-down"></i>
 						</button>
 						<ul class="dropdown-menu"  >
 							<li>	
-								<a ng-click='thread.searchTerm="user"; ' href='javascript:void(0);'>
+								<a ng-click='thread.category="user"; ' href='javascript:void(0);'>
 									<i class="fa fa-user"></i>
 									&nbsp;User
 								</a>
 							</li>
 							<li>
-								<a ng-click='thread.searchTerm="message"; ' href='javascript:void(0);'>
+								<a ng-click='thread.category="message"; ' href='javascript:void(0);'>
 									<i class="fa fa-envelope"></i>
 									&nbsp;Message
 								</a>
@@ -44,14 +44,13 @@
 	
 	<hr>
 
-
 	<div class='threadMain' ng-show='!loading'>
 		<div class="threadContainer clearfix" ng-repeat='thread in threads track by $index' ng-click='navigateToConversation(thread.User.userId);'>
 			<div class="col-xs-2 avatar" style='background:url({{getThreadAvatar(thread.User);}}) center; background-size:cover; background-color: #ccc; '></div>
 
 			<div class="col-xs-10 content">
 				<div class="message">
-					{{thread.Message.id}}
+					{{thread.Message.id}} {{thread.Message.to_id}}
 
 					{{thread.Message.content}}
 				</div>
