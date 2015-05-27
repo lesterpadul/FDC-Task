@@ -51,6 +51,8 @@
 
 			<div class="col-xs-10 content">
 				<div class="message">
+					{{thread.Message.id}}
+
 					{{thread.Message.content}}
 				</div>
 				<div class="time text-right">
@@ -67,11 +69,12 @@
 		</h1>
 	</div>
 	
-	<footer class='threadFooter text-center'>
+	<footer class='threadFooter text-center' ng-show="!limitReached">
 		<hr>
-		<button class="btn btn-default">
+		<button class="btn btn-default" ng-click="loadMoreThreads();">
 			Show More
 		</button>
 	</footer>
+	
 	
 </div>

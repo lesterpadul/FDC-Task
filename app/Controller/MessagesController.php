@@ -42,6 +42,7 @@ class MessagesController extends AppController{
 		MessagesController::initialize();
 
 		$profile = $this->Session->read('profile');
+		$perPage = (int) $this->params->query['perPage'];
 
 		$threads = $this->Message->find('all',
 											array(
@@ -57,14 +58,14 @@ class MessagesController extends AppController{
 											    ),
 												'fields' => array('User.name','User.image','User.id as userId', 'Message.*'),
 												'group' => 'Message.to_id',
-												'order' => 'Message.created DESC',
+												'order' => 'Message.id DESC',
 												'conditions' => array(
 													'OR'=>array(
 															'Message.to_id'=>$profile['id'],
 															'Message.from_id'=>$profile['id']
 														),
 												),
-												'limit'=>1
+												'limit'=>$perPage
 											)
 										);
 
@@ -72,6 +73,46 @@ class MessagesController extends AppController{
 		die(json_encode(array('error'=>false,'content'=>$threads)));
 	}
 
+	public function getMoreThreads(){
+		MessagesController::initialize();
+
+		$lastId  = $this->params->query['lastId'];
+		$perPage = (int) $this->params->query['perPage'];
+
+
+		$profile = $this->Session->read('profile');
+
+		$threads = $this->Message->find('all',
+											array(
+												'joins' => array(
+											        array(
+											            'table' => 'users',
+											            'alias' => 'User',
+											            'type' => 'left',
+											            'conditions' => array(
+											                'User.id = Message.to_id'
+											            )
+											        )
+											    ),
+												'fields' => array('User.name','User.image','User.id as userId', 'Message.*'),
+												'group' => 'Message.to_id',
+												'order' => 'Message.id DESC',
+												'conditions' => array(
+													'OR'=>array(
+															'Message.to_id'=>$profile['id'],
+															'Message.from_id'=>$profile['id']
+														),
+													'AND'=>array(
+															'Message.id <'=>$lastId
+														)
+												),
+												'limit'=>$perPage
+											)
+										);
+
+		die(json_encode(array("error"=>false,"content"=>$threads)));
+	}
+		
 	public function conversation($userId){
 		MessagesController::initialize();
 	}
