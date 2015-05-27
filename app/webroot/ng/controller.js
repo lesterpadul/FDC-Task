@@ -11,7 +11,7 @@ app
 	$s.thread.category   = "user";
 	$s.limitReached      = false;
 	$s.perPage           = 10;
-	$s.profileId     = $('#profileId').val();
+	$s.profileId         = $('#profileId').val();
 
 	/**
 	 * [init description]
@@ -70,14 +70,26 @@ app
 	$s.getThreadAvatar = function($conv){
 		var imgSrc = $rs.base_url + 'public/images/users/';
 		
-		$conv.User2.senderImage = String($conv.User2.senderImage);
 
-		if($conv.User2.senderImage!='null') {
-			imgSrc += $conv.User2.senderImage;
+
+		if($s.profileId==$conv.User2.senderId) {
+			$conv.User.recipientImage = String($conv.User.recipientImage);
+
+			if($conv.User.recipientImage!='null') {
+				imgSrc += $conv.User.recipientImage;
+			} else {
+				imgSrc += 'default.jpg';
+			}
 		} else {
-			imgSrc += 'default.jpg';
+			$conv.User2.senderImage = String($conv.User2.senderImage);
+
+			if($conv.User2.senderImage!='null') {
+				imgSrc += $conv.User2.senderImage;
+			} else {
+				imgSrc += 'default.jpg';
+			}
 		}
-		
+
 		return imgSrc;
 	}
 
@@ -86,7 +98,15 @@ app
 	 * @param  {[type]} $userId [description]
 	 * @return {[type]}         [description]
 	 */
-	$s.navigateToConversation = function($userId){
+	$s.navigateToConversation = function($message){
+		var $userId = 0;
+
+		if($s.profileId==$message.from_id) {
+			$userId = $message.to_id;
+		} else {
+			$userId = $message.from_id;
+		}
+
 		window.location.href = $rs.base_url+'messages/conversation/'+$userId;
 	}
 	
@@ -133,7 +153,11 @@ app
 		);
 	}	
 	
-
+	/**
+	 * [formatDate description]
+	 * @param  {[type]} dateString [description]
+	 * @return {[type]}            [description]
+	 */
 	$s.formatDate = function(dateString){
 		var newDate = moment(dateString).format("YYYY-MM-DD hh:mm A");
 		return newDate;
@@ -141,6 +165,7 @@ app
 
 	//call the initialize function
 	$s.init();
+
 }])
 .controller('ConversationList',['$scope','$rootScope','Ajax','$compile','$sce',function($s,$rs,Ajax,$compile,sce){	
 	$s.conversations = [];
@@ -435,5 +460,5 @@ app
 		} else {
 			alert("Content must not be empty!");
 		}
-	}
+	}	
 }]);
