@@ -33,9 +33,20 @@
 .threadContainer .content .message {
   padding: 10px;
   min-height: 70px;
+  font-size: 15px;
 }
 .threadContainer .content .time {
+  padding: 10px;
+}
+.threadContainer .content .user {
   padding: 5px;
+  margin: 5px;
+  border-bottom: 1px dashed #ccc;
+  font-weight: bold;
+  font-size: 17px;
+}
+.threadContainer .content .user a {
+  color: white;
 }
 .threadContainerOutgoing {
   padding-top: 5px;
@@ -55,9 +66,20 @@
 .threadContainerOutgoing .content .message {
   padding: 10px;
   min-height: 70px;
+  font-size: 15px;
 }
 .threadContainerOutgoing .content .time {
+  padding: 10px;
+}
+.threadContainerOutgoing .content .user {
   padding: 5px;
+  margin: 5px;
+  border-bottom: 1px dashed #ccc;
+  font-weight: bold;
+  font-size: 17px;
+}
+.threadContainerOutgoing .content .user a {
+  color: white;
 }
 .threadFooter {
   padding-top: 20px;
@@ -102,4 +124,7 @@ textarea {
 }
 [ng-cloak] {
   display: none;
+}
+.well {
+  border-radius: 0px;
 }

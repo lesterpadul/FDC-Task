@@ -35,18 +35,30 @@
 		background-color:#ccc;
 		height:90px;
 	}
-
+	
 	.content{
 		background-color:#1ab188;
 		color:#fff;
 		.message{
 			padding: 10px;
 			min-height:70px;
+			font-size:15px;
 		}
 		.time{
-			padding:5px;
+			padding: 10px;
+		}
+		.user{
+			padding: 5px;
+			margin:5px;
+			border-bottom:1px dashed #ccc;
+			font-weight: bold;
+			font-size:17px;
+			a{
+				color:white;
+			}
 		}
 	}
+	
 }
 
 .threadContainerOutgoing{
@@ -106,4 +118,8 @@ textarea{
 
 [ng-cloak]{
 	display:none;
+}
+
+.well{
+	border-radius:0px;
 }

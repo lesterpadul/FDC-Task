@@ -147,7 +147,7 @@ app
 	$s.loading       = false;
 	$s.error         = false;
 	$s.limitReached  = true;
-	$s.perPage       = 10;
+	$s.perPage       = 5;
 	$s.recipientId   = $('#recipientId').val();
 	$s.profileId     = $('#profileId').val();
 
@@ -269,11 +269,20 @@ app
 		);
 	}	
 	
+	/**
+	 * [formatDate description]
+	 * @param  {[type]} dateString [description]
+	 * @return {[type]}            [description]
+	 */
 	$s.formatDate = function(dateString){
 		var newDate = moment(dateString).format("YYYY-MM-DD hh:mm A");
 		return newDate;
 	}
 
+	/**
+	 * [newReply description]
+	 * @return {[type]} [description]
+	 */
 	$s.newReply = function(){
 		var obj    = {};
 		obj.method = 'POST';
@@ -294,7 +303,135 @@ app
 			}
 		);
 	}
+	
+	/**
+	 * [deleteConversation description]
+	 * @return {[type]} [description]
+	 */
+	$s.deleteConversation = function($conversationId,$index){
+		bootbox.confirm("Do you really want to remove this message?",function(result){
+			if(result) {
+				var obj    = {};
+				obj.method = 'POST';
+				obj.url    = $rs.base_url+'messages/removeMessage';
+				obj.data   = {};
+				obj.params = {messageId:$conversationId};
+
+				Ajax
+				.restAction(obj)
+				.then(
+					function(response){
+						bootbox.alert("Message has been removed!");
+						$s.conversations.splice($index,1);
+					},
+					function(response){
+						
+					}
+				);
+			}
+		});
+	}
+	
+	/**
+	 * [updateConversation description]
+	 * @param  {[type]} $convId [description]
+	 * @param  {[type]} $index  [description]
+	 * @return {[type]}         [description]
+	 */
+	$s.updateConversation = function($convId,$index){
+
+		var scope = angular.element($("#messageUpdateModal")).scope();
+
+		$('#messageUpdateModal')
+		.modal("show")
+		.off("shown.bs.modal")
+		.on("shown.bs.modal",function(){
+			scope.$apply(function(){
+				scope.convId    = $convId;
+				scope.convIndex = $index;
+				scope.loadConv();
+			});
+		})
+		.off("hidden.bs.modal")
+		.on("hidden.bs.modal",function(){
+			scope.$apply(function(){
+				scope.convId = 0;
+				scope.loadConv();
+			});
+		});
+
+	}
 
 	//call the initialize function
 	$s.init();
+}])
+.controller('ConversationUpdate',['$scope','$rootScope','Ajax','$compile','$sce',function($s,$rs,Ajax,$compile,sce){	
+	$s.convId      = 0;
+	$s.convContent = "";
+	$s.convIndex   = 0;
+
+	/**
+	 * [loadConv description]
+	 * @return {[type]} [description]
+	 */
+	$s.loadConv = function(){
+		$s.convId = parseInt($s.convId);
+		if(!isNaN($s.convId) && $s.convId!==0) {
+			var obj    = {};
+				obj.method = 'POST';
+				obj.url    = $rs.base_url+'messages/getMessageInformation';
+				obj.data   = {};
+				obj.params = {messageId:$s.convId};
+
+				Ajax
+				.restAction(obj)
+				.then(
+					function(response){
+						$s.convContent = response.data.content[0].Message.content;
+					},
+					function(response){
+						
+					}
+				);
+		} else {
+			$s.convId      = 0;
+			$s.convContent = "";
+			$s.convIndex   = 0;
+		}
+	}
+
+	/**
+	 * [saveMessage description]
+	 * @return {[type]} [description]
+	 */
+	$s.saveMessage = function(){
+		$s.convContent = $.trim($s.convContent);
+		if($s.convContent.length!==0) {
+			var obj    = {};
+			obj.method = 'POST';
+			obj.url    = $rs.base_url+'messages/saveMessageForm';
+			obj.data   = new FormData(document.getElementById('ConversationUpdateForm'));
+			obj.params = {};
+
+			Ajax
+			.restAction(obj)
+			.then(
+				function(response){
+					var scope = angular.element($("[ng-controller='ConversationList']")).scope();
+
+					scope.conversations[$s.convIndex].Message.content = $s.convContent;
+					
+					$('#messageUpdateModal')
+					.modal("hide");
+
+					bootbox.alert("Message has been updated!");
+				},
+				function(response){
+					
+				}
+			);
+		} else {
+			alert("Content must not be empty!");
+		}
+	}
 }]);
