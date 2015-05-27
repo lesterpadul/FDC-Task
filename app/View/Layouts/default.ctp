@@ -67,7 +67,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
 				<li>
 					<a href="<?php echo $base_url.'messages/index'; ?>">
-						<i class="fa fa-envelope"></i>&nbsp;Messages
+						<i class="fa fa-comment"></i>&nbsp;Conversations
 					</a>
 				</li>
 
@@ -86,7 +86,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
 			</ul>
 		</div><!-- /.navbar-collapse -->
-
+		
 	</nav>
 	<?php endif;  ?>
 	

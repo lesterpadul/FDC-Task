@@ -16,8 +16,7 @@ class UsersController extends AppController{
 	public function initialize(){
 		parent::initialize();
 	}
-		
-
+	
 	/**
 	 * [login description]
 	 * @return [type] [description]
@@ -76,6 +75,7 @@ class UsersController extends AppController{
     	$this->data['styles'][] = 'css/main.css';
     	$this->set($this->data);
     	$this->set('user',$user);
+    	$this->set('profile',$this->Session->read('profile'));
     }
 
     /**
@@ -116,17 +116,28 @@ class UsersController extends AppController{
 
 			endif;
 
-			if(count($error)==0):
-				if($this->User->save($this->request->data)):
+			if(count($error)==0) {
+
+				if($this->User->validates(array("fieldList"=>array("name","hobby")))) {
+					
+					$this->User->id = $userId;
+					
+					$this->User->save($this->request->data);
+
 					$this->Session->setFlash('Success!','default',array('class'=>'alert alert-success'));
 
 					$user = $this->User->findById($userId);	
 					$this->Session->write('profile',$user['User']);
 					$this->redirect(array('controller'=>'users','action'=>'view',$userId));
-				else:
+
+				} else {
 					$error[] = $this->User->validationErrors;
-				endif;
-			endif;
+					var_dump( $this->User->validationErrors);
+				}
+
+			} else {
+				$this->set("validationError",$error);
+			}
 			
     	endif;
 
@@ -136,7 +147,6 @@ class UsersController extends AppController{
     	$user = $this->User->findById($userId);
 		$this->set($this->data);
 		$this->request->data = $user;
-		
     }
     
     /**
@@ -163,12 +173,14 @@ class UsersController extends AppController{
    			$this->Session->write('profile',$user['User']);
 
    			$this->User->id = $user['User']['id'];
+
 			$this->User->save(array('User'=>array('last_login_time'=>date('Y-m-d H:i:s'))));
-			
+
 			die(json_encode(array('error'=>false,'content'=>'success')));
+
    		endif;
    		
    		$this->autoRender =false;
-   	}
+   	}	
    	
 }

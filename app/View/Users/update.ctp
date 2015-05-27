@@ -11,6 +11,7 @@
 				echo $this->Form->create('User',array('class'=>'form-horizontal','enctype'=>'multipart/form-data','id'=>'UpdateUserForm'));
 			?>
 				<div class="clearfix">
+
 					<!-- img src -->
 					<?php 
 						$img_src = $base_url;
@@ -20,10 +21,11 @@
 							$img_src .= 'public/images/users/'.$this->request->data['User']['image'];
 						endif;
 					?>
-
+					
 					<div class="col-xs-4">
+
 						<div class="fileinput fileinput-new" data-provides="fileinput">
-						  <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+						  <div class="fileinput-new thumbnail">
 						    <img data-src="<?php echo $img_src; ?>" src='<?php echo $img_src; ?>'>
 						  </div>
 						  <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
@@ -32,6 +34,7 @@
 						    <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
 						  </div>
 						</div>
+
 					</div>
 					<!-- /. -->
 					
@@ -40,9 +43,7 @@
 						
 						<div class="form-group">
 							<label>Name*</label>
-							<?php 
-								echo $this->Form->input('name',array('label'=>false,'class'=>'form-control'));
-							?>
+							<input type="text" name='data[User][name]' maxlength="25" value="<?php echo $this->request->data['User']['name'] ?>" class="form-control">
 						</div>	
 						
 						<div class="form-group">
@@ -58,7 +59,7 @@
 									</div>
 								</div>
 							</div>
-
+							
 							<div class="col-xs-6" style='padding-right:0px;'>
 								<label>Gender*</label>
 								<select name="gender" id="" class="form-control">
@@ -68,6 +69,7 @@
 									<option value="3" <?php if($this->request->data['User']['gender']=='3'): echo "selected='selected'"; endif; ?>>Other</option>
 								</select>
 							</div>
+							
 						</div>
 						
 						<div class="form-group">

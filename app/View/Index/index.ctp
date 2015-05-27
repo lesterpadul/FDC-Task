@@ -2,8 +2,8 @@
       
       <!-- tabs -->
       <ul class="tab-group">
-        <li class="tab"><a href="#signup">Sign Up</a></li>
-        <li class="tab active"><a href="#login">Log In</a></li>
+        <li class="tab active"><a href="#signup">Sign Up</a></li>
+        <li class="tab "><a href="#login">Log In</a></li>
       </ul>
       <!-- /. -->
       
@@ -17,7 +17,7 @@
       <div class="tab-content">
         
         <!-- signup -->
-        <div id="signup" style='display:none;'>   
+        <div id="signup" style='display:block;'>   
           
           <form action="<?php echo $base_url.'users/register'; ?>" method="post" id='RegisterUserForm'>
             
@@ -25,7 +25,7 @@
               <label>
                 Name<span class="req">*</span>
               </label>
-              <input type="text" required autocomplete="off" name='name_user'/>
+              <input type="text" required autocomplete="off" name='name_user' maxlength="20" />
             </div>
             
             <div class="field-wrap form-group">
@@ -56,7 +56,7 @@
         <!-- /. -->
         
         <!-- login -->
-        <div id="login" style='display:block;'>   
+        <div id="login" style='display:none;'>   
       
           <?php 
             echo $this->Form->create('User',array('controller'=>'Users','action'=>'login'));

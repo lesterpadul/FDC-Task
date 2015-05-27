@@ -11,7 +11,16 @@ class IndexController extends AppController{
 		$this->data['styles'][]         ='css/index/index.css';
 		$this->data['header_scripts'][] = 'js/index/index.js';
 		$this->data['landing_page']     = true;
-		
 		$this->set($this->data);
 	}
+
+
+	public function finalStep(){
+		IndexController::initialize();
+		$this->data['styles'][]         ='css/index/index.css';
+		$this->data['header_scripts'][] = 'js/index/index.js';
+		$this->data['landing_page']     = true;
+		$this->set($this->data);
+	}
+		
 }

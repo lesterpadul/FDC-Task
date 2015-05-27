@@ -5,12 +5,18 @@
   			<h3 class="pull-left">
   				User Profile
   			</h3>
+
   			<div class="pull-right">
+
+          <?php if($profile["id"]==$user["User"]["id"]) { ?>
   				<a href="<?php echo $base_url.'users/update/'.$user['User']['id']; ?>" class='btn btn-default'>
             <i class="fa fa-pencil"></i>
             &nbsp;Update
           </a>
+          <?php } ?>
+
   			</div>
+
   		</div>
     	</div>
     	<div class="panel-body clearfix">

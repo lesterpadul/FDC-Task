@@ -12,6 +12,8 @@ class MessagesController extends AppController{
 	
 	public function index(){
 		MessagesController::initialize();
+		$profile    = $this->Session->read('profile');
+		$this->set("profileId",$profile["id"]);
 	}
 
 	public function add(){
@@ -62,22 +64,41 @@ class MessagesController extends AppController{
 											            'conditions' => array(
 											                'User.id = Message.to_id'
 											            )
+											        ),
+											        array(
+											            'table' => 'users',
+											            'alias' => 'User2',
+											            'type' => 'left',
+											            'conditions' => array(
+											                'User2.id = Message.from_id'
+											            )
 											        )
 											    ),
-												'fields' => array('User.name','User.image','User.id as userId', 'Message.*'),
-												'group' => 'Message.to_id',
+												'fields' => array(
+																'User.name as recipientName',
+																'User.id as recipientId',
+																'User.image as recipientImage',
+																'User2.name as senderName',
+																'User2.image as senderImage',
+																'User2.id as senderId',
+																'User.id as userId', 
+																'Message.*'
+															),
 												'order' => 'Message.id DESC',
 												'conditions' => array(
 													'OR'=>array(
 															'Message.to_id'   =>$profile['id'],
 															'Message.from_id' =>$profile['id']
 														),
-													$likeSearch
+													$likeSearch,
+													"Message.status='active'"
 												),
+												'group' => 'Message.from_id, Message.to_id',
 												'limit'=>$perPage
 											)
 										);
-
+		
+		//debug($threads);
 		die(json_encode(array('error'=>false,'content'=>$threads)));
 	}
 
@@ -112,10 +133,26 @@ class MessagesController extends AppController{
 											            'conditions' => array(
 											                'User.id = Message.to_id'
 											            )
+											        ),
+											        array(
+											            'table' => 'users',
+											            'alias' => 'User2',
+											            'type' => 'left',
+											            'conditions' => array(
+											                'User2.id = Message.from_id'
+											            )
 											        )
 											    ),
-												'fields' => array('User.name','User.image','User.id as userId', 'Message.*'),
-												'group' => 'Message.to_id',
+												'fields' => array(
+																'User.name as recipientName',
+																'User.id as recipientId',
+																'User.image as recipientImage',
+																'User2.name as senderName',
+																'User2.image as senderImage',
+																'User2.id as senderId',
+																'User.id as userId', 
+																'Message.*'
+															),
 												'order' => 'Message.id DESC',
 												'conditions' => array(
 													'OR'=>array(
@@ -123,9 +160,11 @@ class MessagesController extends AppController{
 															'Message.from_id' =>$profile['id']
 														),
 													'AND'=>$andQuery,
-													$likeSearch
+													$likeSearch,
+													"Message.status='active'"
 												),
-												'limit'=>$perPage
+												'limit'=>$perPage,
+												'group' => 'Message.from_id, Message.to_id',
 											)
 										);
 
@@ -135,8 +174,20 @@ class MessagesController extends AppController{
 	public function conversation($userId){
 		MessagesController::initialize();
 		$profile     = $this->Session->read('profile');
+
+
+		$recipient = $this->User->find('first',
+									array(
+										'conditions'=>array(
+											'User.id'=>$userId
+										)
+									)
+								);
+
 		$this->set('recipientId',$userId);
 		$this->set('profileId',$profile['id']);
+		$this->set('recipient',$recipient);
+
 	}
 
 	public function getConversation(){
@@ -154,17 +205,35 @@ class MessagesController extends AppController{
 											            'conditions' => array(
 											                'User.id = Message.to_id'
 											            )
+											        ),
+											        array(
+											            'table' => 'users',
+											            'alias' => 'User2',
+											            'type' => 'left',
+											            'conditions' => array(
+											                'User2.id = Message.from_id'
+											            )
 											        )
 											    ),
-												'fields' => array('User.name','User.image','User.id as userId', 'Message.*'),
+												'fields' => array(
+																'User.name as recipientName',
+																'User.id as recipientId',
+																'User.image as recipientImage',
+																'User2.name as senderName',
+																'User2.image as senderImage',
+																'User2.id as senderId',
+																'User.id as userId', 
+																'Message.*'
+															),
 												'order' => 'Message.id DESC',
 												'conditions' => array(
-															"(Message.to_id={$recipientId} OR Message.from_id={$recipientId}) AND (Message.to_id={$profile['id']} OR Message.from_id={$profile['id']})"
+															"(Message.to_id={$recipientId} OR Message.from_id={$recipientId}) AND (Message.to_id={$profile['id']} OR Message.from_id={$profile['id']})",
+															"Message.status='active'"
 												),
 												'limit'=>$perPage
 											)
 										);
-
+		
 		die(json_encode(array("error"=>false,"content"=>$threads)));
 	}
 
@@ -184,19 +253,154 @@ class MessagesController extends AppController{
 											            'conditions' => array(
 											                'User.id = Message.to_id'
 											            )
+											        ),
+											        array(
+											            'table' => 'users',
+											            'alias' => 'User2',
+											            'type' => 'left',
+											            'conditions' => array(
+											                'User2.id = Message.from_id'
+											            )
 											        )
 											    ),
-												'fields' => array('User.name','User.image','User.id as userId', 'Message.*'),
+												'fields' => array(
+																'User.name as recipientName',
+																'User.id as recipientId',
+																'User.image as recipientImage',
+																'User2.name as senderName',
+																'User2.image as senderImage',
+																'User2.id as senderId',
+																'User.id as userId', 
+																'Message.*'
+															),
 												'order' => 'Message.id DESC',
 												'conditions' => array(
 															"(Message.to_id={$recipientId} OR Message.from_id={$recipientId}) AND (Message.to_id={$profile['id']} OR Message.from_id={$profile['id']})",
-															"Message.id < {$lastId}"
+															"Message.id < {$lastId}",
+															"Message.status='active'"
 												),
 												'limit'=>$perPage
 											)
 										);
-		
+
 		die(json_encode(array("error"=>false,"content"=>$threads)));
 	}
+
+	public function replyMessage(){
+		$error   = false;
+		$content = "";
+
+		if($this->request->is(array('post','put'))) {
+
+			$this->Message->create();
+
+			if($this->Message->save($this->request->data)) {
+				$error   = false;
+				$content = "";
+
+
+				$thread = $this->Message->find('all',
+											array(
+												'joins' => array(
+											        array(
+														'table'      => 'users',
+														'alias'      => 'User',
+														'type'       => 'left',
+														'conditions' => array(
+											                'User.id = Message.to_id'
+											            ),
+											        ),
+											        array(
+											            'table' => 'users',
+											            'alias' => 'User2',
+											            'type' => 'left',
+											            'conditions' => array(
+											                'User2.id = Message.from_id'
+											            )
+											        )
+											    ),
+												'fields' => array(
+																'User.name as recipientName',
+																'User.id as recipientId',
+																'User.image as recipientImage',
+																'User2.name as senderName',
+																'User2.image as senderImage',
+																'User2.id as senderId',
+																'User.id as userId', 
+																'Message.*'
+															),
+												'conditions' => array(
+															"Message.id = {$this->Message->id}",
+															"Message.status='active'"
+												),
+												'limit'=>1
+											)
+										);
+
+				$content = $thread;
+			} else {
+				$error = true;
+				$content = $this->Message->validationErrors();
+			}
+		} else {
+			$error   = true;
+			$content = "No Request!";
+		}
+
+		die(json_encode(array("error"=>$error,"content"=>$content)));
+	}
+		
+	public function removeMessage(){
+		$messageId = $this->params->query['messageId'];
+		
+		$this->Message->id = $messageId;
+		$this->Message->save(array("status"=>"inactive"));
+		die(json_encode(array("error"=>false,"content"=>"")));
+	}
 	
+	public function getMessageInformation(){
+		$messageId = $this->params->query['messageId'];
+		$message = $this->Message->find('all',array('conditions'=>array('Message.id'=>$messageId)));
+		die(json_encode(array("error"=>false,"content"=>$message)));
+	}
+	
+	public function saveMessageForm(){
+		$this->Message->id = $_POST['convId'];
+		$this->Message->save(array("content"=>$_POST["content"]));
+		die();
+	}
+
+	public function checkEmailExistence(){
+		MessagesController::initialize();
+
+		$email  = "";
+
+		if(!is_null(@$this->params->query['data']['User']['email'])) {
+			$email = $this->params->query['data']['User']['email'];
+		} else {
+			$email = $this->params->query['email'];
+		}
+
+		$profile = $this->Session->read('profile');
+
+		$checkEmail = $this->User->find('all',array(
+													"conditions"=>array(
+															"User.email='{$email}'",
+															"User.email!='{$profile['email']}'"
+														)
+													)
+										);
+
+      	if(count($checkEmail)!=0) {
+
+        	die(json_encode(array("valid"=>false)));
+
+      	} else {
+
+        	die(json_encode(array("valid"=>true)));
+
+      	}
+      	
+	}
+		
 }
