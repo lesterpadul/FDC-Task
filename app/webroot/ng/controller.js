@@ -70,8 +70,6 @@ app
 	$s.getThreadAvatar = function($conv){
 		var imgSrc = $rs.base_url + 'public/images/users/';
 		
-
-
 		if($s.profileId==$conv.User2.senderId) {
 			$conv.User.recipientImage = String($conv.User.recipientImage);
 
@@ -99,6 +97,7 @@ app
 	 * @return {[type]}         [description]
 	 */
 	$s.navigateToConversation = function($message){
+
 		var $userId = 0;
 
 		if($s.profileId==$message.from_id) {
@@ -108,6 +107,7 @@ app
 		}
 
 		window.location.href = $rs.base_url+'messages/conversation/'+$userId;
+
 	}
 	
 	/**
@@ -115,6 +115,7 @@ app
 	 * @return {[type]} [description]
 	 */
 	$s.loadMoreThreads = function(){
+
 		var lastId = $s.threads[$s.threads.length-1];
 		
 		var obj    = {};
@@ -151,6 +152,7 @@ app
 				
 			}
 		);
+
 	}	
 	
 	/**
@@ -159,8 +161,10 @@ app
 	 * @return {[type]}            [description]
 	 */
 	$s.formatDate = function(dateString){
+
 		var newDate = moment(dateString).format("YYYY-MM-DD hh:mm A");
 		return newDate;
+		
 	}
 
 	//call the initialize function
