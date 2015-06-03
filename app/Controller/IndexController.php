@@ -10,6 +10,7 @@ class IndexController extends AppController{
 		IndexController::initialize();
 		$this->data['styles'][]         ='css/index/index.css';
 		$this->data['header_scripts'][] = 'js/index/index.js';
+
 		$this->data['landing_page']     = true;
 		$this->set($this->data);
 	}
@@ -19,6 +20,7 @@ class IndexController extends AppController{
 		IndexController::initialize();
 		$this->data['styles'][]         ='css/index/index.css';
 		$this->data['header_scripts'][] = 'js/index/index.js';
+
 		$this->data['landing_page']     = true;
 		$this->set($this->data);
 	}

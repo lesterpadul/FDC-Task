@@ -37,12 +37,10 @@ class UsersController extends AppController{
 			$this->Session->write('profile',$user['User']);
 			$this->User->id = $user['User']['id'];
 			$this->User->save(array('User'=>array('last_login_time'=>date('Y-m-d H:i:s'))));
-			die(json_encode(array('error'=>false,'content'=>'success')));
+			die(json_encode(array('error'=>false,'content'=>'success',"redirectTo"=>"somewhere")));
 		else:	
 			die(json_encode(array('error'=>true,'content'=>'fail')));
 		endif;
-
-		return false;
 	}
 	
 	/**
@@ -108,13 +106,14 @@ class UsersController extends AppController{
 				$img_name = $name.'.'.$ext;
 
 				if(count($error)==0) {
-					if(move_uploaded_file($_FILES['image']['tmp_name'],WWW_ROOT.'public/images/users/'.$img_name)):
+					if(move_uploaded_file($_FILES['image']['tmp_name'], WWW_ROOT.'public/images/users/'.$img_name)):
 						$this->User->id = $userId;
 						$this->User->save(array('User'=>array('image'=>$img_name)));
 					else:
 						$error[] = 'upload_error';
 					endif;
 				}
+
 			}
 
 			if(count($error)==0) {

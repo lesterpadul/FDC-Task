@@ -4,10 +4,9 @@ class MessagesController extends AppController{
 
 	public function initialize(){
 		parent::initialize();
-		$this->data['styles'][] = 'css/main.css';
-		$this->data['header_scripts'][] = 'js/messages/message.js';
-		$this->set($this->data);
-		$this->loadModel('User');
+		unset($this->data["header_scripts"][3]);
+		$this->data['styles'][]         = 'css/main.css';
+		$this->data['header_scripts']['forMessage123'] = 'js/messages/message.js';
 	}	
 	
 	public function index(){
@@ -15,7 +14,7 @@ class MessagesController extends AppController{
 		$profile    = $this->Session->read('profile');
 		$this->set("profileId",$profile["id"]);
 	}
-
+	
 	public function add(){
 		MessagesController::initialize();	
 		
@@ -100,7 +99,6 @@ class MessagesController extends AppController{
 												'limit'=>$perPage
 											)
 										);
-		
 		//debug($threads);
 		die(json_encode(array('error'=>false,'content'=>$threads)));
 	}

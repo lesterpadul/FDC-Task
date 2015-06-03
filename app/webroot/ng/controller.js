@@ -273,6 +273,7 @@ app
 						recipientId : $s.recipientId
 					};
 
+
 		Ajax
 		.restAction(obj)
 		.then(
@@ -296,6 +297,7 @@ app
 				
 			}
 		);
+
 	}	
 	
 	/**
@@ -326,11 +328,13 @@ app
 				var data = response.data.content;
 				$s.conversations.unshift(data[0]);
 				$("[name='content']").empty().val('');
+
 			},
 			function(response){
 				
 			}
 		);
+
 	}
 
 	/**

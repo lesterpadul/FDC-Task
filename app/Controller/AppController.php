@@ -31,7 +31,7 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-
+	
 	public $data = null;
 	public $helpers = array('Html','Form');
 
@@ -53,8 +53,8 @@ class AppController extends Controller {
 									'ng/service.js',
 									'ng/directive.js'
 								);
-		
-		$this->data['styles']        = array(
+		$this->data["footer_scripts"] = array();
+		$this->data['styles']         = array(
 									'bower_components/bootstrap/dist/css/bootstrap.css',
 									'bower_components/bootstrap/dist/css/bootstrap-theme.css',
 									'bower_components/fontawesome/css/font-awesome.css',
@@ -71,5 +71,5 @@ class AppController extends Controller {
 	public function checkIfLoggedIn(){
 			
 	}
-
+	
 }

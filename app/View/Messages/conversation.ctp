@@ -19,7 +19,7 @@
 		</header>
 
 		<hr>
-		
+
 		<div class="conversationContainer" ng-show="conversations.length!=0">
 			
 			<div class='threadContainerMain' ng-repeat="conversation in conversations track by $index">
@@ -91,7 +91,10 @@
 				Show More
 			</button>
 		</footer>
+
+
 	</div>
+
 	
 </div>
 
